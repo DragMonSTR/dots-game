@@ -16,6 +16,24 @@ export default class Game {
     function generatePlayers() {
       Game.playerArray.push(new Player("monkey", "#5a5"))
       Game.playerArray.push(new Player("cat", "#55a"))
+      Game.playerArray.push(new Player("dog", "#a55"))
+    }
+  }
+
+  static cellClicked(verticalIndex, horizontalIndex) {
+    const clickedCell = GameField.getCell(verticalIndex, horizontalIndex)
+    if (clickedCell.playerIndex !== this.playerWhoMovesIndex) {
+      return
+    }
+
+    GameField.addDotToCell(verticalIndex, horizontalIndex)
+    this.switchPlayerWhoMovesIndex()
+  }
+
+  static switchPlayerWhoMovesIndex() {
+    this.playerWhoMovesIndex++
+    if (this.playerWhoMovesIndex === this.playerArray.length) {
+      this.playerWhoMovesIndex = 0
     }
   }
 }

@@ -7,16 +7,13 @@
         v-for="(matrixRowInfo, i) in matrix"
         :key="i"
       >
-        <div
-          class="matrix__cell cell"
+        <Cell
+          class="matrix__cell"
           v-for="(cellInfo, j) in matrixRowInfo"
           :key="j"
-        >
-          <div
-            class="cell__main-circle"
-            :style="{'background-color': getCellColor(cellInfo)}"
-          ></div>
-        </div>
+          :cell-info="cellInfo"
+          @click="cellClicked(i, j)"
+        />
       </div>
     </div>
   </div>
@@ -25,25 +22,24 @@
 <script>
 import Game from "@/assets/gameLogic/game"
 import GameField from "@/assets/gameLogic/gameField"
+import Cell from "@/components/Cell"
+import {ref} from "vue"
 
 export default {
   name: "GameField",
-  data: () => ({
-    matrix: [[]]
-  }),
+  components: {Cell},
+  computed: {
+    matrix() {
+      return GameField.getMatrix()
+    }
+  },
   methods: {
-    getCellColor(cellInfo) {
-      if (cellInfo.playerIndex === -1) {
-        return "#fff"
-      }
-      const player = Game.playerArray[cellInfo.playerIndex]
-      return player.color
+    cellClicked(verticalIndex, horizontalIndex) {
+      Game.cellClicked(verticalIndex, horizontalIndex)
     }
   },
   mounted() {
     Game.start(10)
-
-    this.matrix = GameField.matrix
   }
 }
 </script>
@@ -75,20 +71,5 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-
-.cell__main-circle {
-  width: 65%;
-  height: 65%;
-
-  border-radius: 50%;
-
-  transition: transform .2s ease;
-  cursor: pointer;
-}
-
-.cell__main-circle:hover {
-  transform: scale(1.1);
 }
 </style>

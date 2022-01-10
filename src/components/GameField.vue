@@ -9,10 +9,13 @@
       >
         <div
           class="matrix__cell cell"
-          v-for="(matrixInfo, j) in matrixRowInfo"
+          v-for="(cellInfo, j) in matrixRowInfo"
           :key="j"
         >
-          <div class="cell__main-circle"></div>
+          <div
+            class="cell__main-circle"
+            :style="{'background-color': getCellColor(cellInfo)}"
+          ></div>
         </div>
       </div>
     </div>
@@ -28,6 +31,15 @@ export default {
   data: () => ({
     matrix: [[]]
   }),
+  methods: {
+    getCellColor(cellInfo) {
+      if (cellInfo.playerIndex === -1) {
+        return "#fff"
+      }
+      const player = Game.playerArray[cellInfo.playerIndex]
+      return player.color
+    }
+  },
   mounted() {
     Game.start(10)
 
@@ -70,7 +82,6 @@ export default {
   width: 65%;
   height: 65%;
 
-  background-color: #fff;
   border-radius: 50%;
 
   transition: transform .2s ease;

@@ -7,7 +7,8 @@ export default class Cell {
     this.dotsNumber = dotsNumber
   }
 
-  setPlayerIndex(playerIndex) {
+  giveToPlayer(playerIndex, dotsNumber = 1) {
     this.playerIndex = playerIndex
+    this.dotsNumber = dotsNumber
   }
 }

@@ -5,7 +5,9 @@
 </template>
 
 <script>
-import GameField from "@/components/GameField";
+import GameField from "@/components/GameField"
+
+
 export default {
   name: "Game",
   components: {GameField}

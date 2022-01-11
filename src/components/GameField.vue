@@ -4,15 +4,15 @@
       class="matrix">
       <div
         class="matrix__row"
-        v-for="(matrixRowInfo, i) in matrix"
+        v-for="i in height"
         :key="i"
       >
         <Cell
           class="matrix__cell"
-          v-for="(cellInfo, j) in matrixRowInfo"
+          v-for="j in width"
           :key="j"
-          :cell-info="cellInfo"
-          @click="cellClicked(i, j)"
+          :cell-info="getCellInfo(i - 1, j - 1)"
+          @click="cellClicked(i - 1, j - 1)"
         />
       </div>
     </div>
@@ -23,17 +23,18 @@
 import Game from "@/assets/gameLogic/game"
 import GameField from "@/assets/gameLogic/gameField"
 import Cell from "@/components/Cell"
-import {ref} from "vue"
 
 export default {
   name: "GameField",
   components: {Cell},
   computed: {
-    matrix() {
-      return GameField.getMatrix()
-    }
+    width: () => GameField.getWidth(),
+    height: () => GameField.getHeight()
   },
   methods: {
+    getCellInfo(verticalIndex, horizontalIndex) {
+      return GameField.getCellByPosition(verticalIndex, horizontalIndex)
+    },
     cellClicked(verticalIndex, horizontalIndex) {
       Game.cellClicked(verticalIndex, horizontalIndex)
     }

@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     getCellColor(cellInfo) {
-      if (cellInfo.playerIndex === -1) {
+      if (cellInfo.playerIndex === null) {
         return "#fff"
       }
       const player = Game.playerArray[cellInfo.playerIndex]

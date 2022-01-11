@@ -3,6 +3,7 @@ import Player from "@/assets/gameLogic/player";
 
 export default class Game {
   static started = false
+  static moveAvailable = true
 
   static playerArray = []
   static playerWhoMovesIndex = 0
@@ -15,22 +16,28 @@ export default class Game {
 
     function generatePlayers() {
       Game.playerArray.push(new Player("monkey", "#5a5"))
-      //Game.playerArray.push(new Player("cat", "#55a"))
+      Game.playerArray.push(new Player("cat", "#55a"))
       //Game.playerArray.push(new Player("dog", "#a55"))
     }
   }
 
   static cellClicked(verticalIndex, horizontalIndex) {
-    const clickedCell = GameField.getCellByPosition(verticalIndex, horizontalIndex)
+    if (!this.moveAvailable) {
+      return
+    }
+    const clickedCell =
+      GameField.getCellByPosition(verticalIndex, horizontalIndex)
     if (clickedCell.playerIndex !== this.playerWhoMovesIndex) {
       return
     }
 
-    GameField.addDotToCell(verticalIndex, horizontalIndex)
-    GameField.explodeCells()
+    this.moveAvailable = false
+    clickedCell.addDot()
+    GameField.runExplosions()
 
     this.switchPlayerWhoMovesIndex()
   }
+
 
   static switchPlayerWhoMovesIndex() {
     this.playerWhoMovesIndex++

@@ -40,7 +40,7 @@ export default class GameField {
   static setSize(width, height) {
     this.width.value = width
     this.height.value = height
-    this.fillCellArrayWithEmptySlots()
+    this.fillCellArrayWithEmptyCells()
   }
 
   static giveStartCellsToPlayers() {
@@ -79,24 +79,31 @@ export default class GameField {
     }
   }
 
-  static addDotToCell(verticalIndex, horizontalIndex) {
-    const cell = this.getCellByPosition(verticalIndex, horizontalIndex)
-    cell.addDot()
+  static runExplosions() {
+    const cellsToExplode = this.getCellsToExplode()
+    this.explodeCells(cellsToExplode)
   }
 
-  static explodeCells() {
-    let cellsToExplode = this.getCellsToExplode()
-    while (cellsToExplode.length) {
-      for (let cell of cellsToExplode) {
-        cell.explode()
-      }
-      this.summarizeDotsAfterExplosionCycle()
-      cellsToExplode = this.getCellsToExplode()
+
+  static explodeCells(cellsToExplode) {
+    for (let cell of cellsToExplode) {
+      cell.explode()
     }
+    this.summarizeDotsAfterExplosionCycle()
+
+    cellsToExplode = this.getCellsToExplode()
+    if (!cellsToExplode.length) {
+      Game.moveAvailable = true
+      return
+    }
+
+    setTimeout(() => {
+      this.explodeCells(cellsToExplode)
+    }, 1000)
   }
 
 
-  static fillCellArrayWithEmptySlots() {
+  static fillCellArrayWithEmptyCells() {
     this.cellArray.value.length = this.getSize()
     for (let i = 0; i < this.getHeight(); i++) {
       for (let j = 0; j < this.getWidth(); j++) {

@@ -1,7 +1,6 @@
 <template>
   <div class="game-field">
-    <div
-      class="matrix">
+    <div class="matrix">
       <div
         class="matrix__row"
         v-for="i in height"
@@ -10,7 +9,7 @@
         <Cell
           class="matrix__cell"
           v-for="j in width"
-          :key="j"
+          :key="width * i + j"
           :cell-info="getCellInfo(i - 1, j - 1)"
           @click="cellClicked(i - 1, j - 1)"
         />

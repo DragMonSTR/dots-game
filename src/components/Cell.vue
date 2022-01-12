@@ -1,8 +1,12 @@
 <template>
   <div class="cell">
     <div
-      class="cell__main-circle"
+      class="cell__circle"
+      :class="{'cell__circle-hovered': circleHovered}"
+      ref="circle"
       :style="{'background-color': getCellColor(cellInfo)}"
+      @mouseenter="mouseEntered"
+      @mouseleave="circleHovered = false"
     >
       <div
         class="cell__dot"
@@ -14,7 +18,10 @@
 </template>
 
 <script>
-import Game from "@/assets/gameLogic/game";
+import {ref} from "vue"
+import Game from "@/assets/gameLogic/game"
+import AnimationParameters from "@/assets/animation/animationParameters"
+import MyAnimation from "@/assets/animation/myAnimation"
 
 export default {
   name: "Cell",
@@ -24,6 +31,12 @@ export default {
       required: true
     }
   },
+  data: () => ({
+    animationDuration: {
+      addDot: 1000
+    },
+    circleHovered: false
+  }),
   methods: {
     getCellColor(cellInfo) {
       if (cellInfo.playerIndex === null) {
@@ -31,13 +44,41 @@ export default {
       }
       const player = Game.playerArray[cellInfo.playerIndex]
       return player.color
+    },
+    mouseEntered() {
+      if (this.cellInfo.checkIfAvailableForClick()) {
+        this.circleHovered = true
+      }
+    },
+    playAddDotAnimation() {
+      const animationParameters = new AnimationParameters()
+      animationParameters.setDuration(this.animationDuration.addDot)
+      animationParameters.setRenderFunction(value => {
+        this.circle.style.transform = `scale(${value})`
+      })
+      animationParameters.setTimingFunction(MyAnimation.easeOutElastic)
+
+      MyAnimation.animate(animationParameters)
+      setTimeout(() => {
+        this.circle.style.transform = ""
+      }, this.animationDuration.addDot + 100)
+    }
+  },
+  mounted() {
+    this.cellInfo.setComponentContext(this)
+  },
+  setup() {
+    const circle = ref(null)
+
+    return {
+      circle
     }
   }
 }
 </script>
 
 <style scoped>
-.cell__main-circle {
+.cell__circle {
   width: 65%;
   height: 65%;
 
@@ -49,10 +90,10 @@ export default {
   border-radius: 50%;
 
   transition: transform .2s ease;
-  cursor: pointer;
 }
 
-.cell__main-circle:hover {
+.cell__circle-hovered {
+  cursor: pointer;
   transform: scale(1.1);
 }
 

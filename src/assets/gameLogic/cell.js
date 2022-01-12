@@ -51,11 +51,8 @@ export default class Cell {
 
     const neighbourCells = this.getNeighbourCells()
     for (let neighbourCell of neighbourCells) {
-      if (neighbourCell.playerIndex === this.playerIndex) {
-        neighbourCell.addDotAfterExplosionCycle()
-        continue
-      }
-      neighbourCell.giveToPlayer(this.playerIndex)
+      neighbourCell.playerIndex = this.playerIndex
+      neighbourCell.addDotAfterExplosionCycle()
     }
   }
 
@@ -98,6 +95,11 @@ export default class Cell {
   }
 
   summarizeDotsAfterExplosionCycle() {
+    if (this.newDotsAfterExplosionCycle === 0) {
+      return
+    }
+
+    this.componentContext.playAddDotAnimation()
     this.dotsNumber += this.newDotsAfterExplosionCycle
     this.newDotsAfterExplosionCycle = 0
     if (this.dotsNumber > 5) {

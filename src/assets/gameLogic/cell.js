@@ -1,4 +1,5 @@
 import GameField from "@/assets/gameLogic/gameField";
+import Game from "@/assets/gameLogic/game";
 
 export default class Cell {
   verticalIndex
@@ -6,6 +7,7 @@ export default class Cell {
   playerIndex
   dotsNumber
   newDotsAfterExplosionCycle
+  componentContext
 
   constructor(verticalIndex, horizontalIndex) {
     this.verticalIndex = verticalIndex
@@ -16,8 +18,8 @@ export default class Cell {
   }
 
 
-  checkIfNeedToExplode() {
-    return this.dotsNumber >= 4;
+  setComponentContext(context) {
+    this.componentContext = context
   }
 
   giveToPlayer(playerIndex, dotsNumber = 1) {
@@ -25,8 +27,20 @@ export default class Cell {
     this.dotsNumber = dotsNumber
   }
 
+  checkIfAvailableForClick() {
+    if (!Game.moveAvailable) {
+      return false
+    }
+    return this.playerIndex === Game.playerWhoMovesIndex;
+  }
+
   addDot() {
     this.dotsNumber++
+    this.componentContext.playAddDotAnimation()
+  }
+
+  checkIfNeedToExplode() {
+    return this.dotsNumber >= 4;
   }
 
   explode() {

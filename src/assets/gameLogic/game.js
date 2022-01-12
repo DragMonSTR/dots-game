@@ -21,20 +21,9 @@ export default class Game {
     }
   }
 
-  static cellClicked(verticalIndex, horizontalIndex) {
-    if (!this.moveAvailable) {
-      return
-    }
-    const clickedCell =
-      GameField.getCellByPosition(verticalIndex, horizontalIndex)
-    if (clickedCell.playerIndex !== this.playerWhoMovesIndex) {
-      return
-    }
-
+  static cellClicked() {
     this.moveAvailable = false
-    clickedCell.addDot()
     GameField.runExplosions()
-
     this.switchPlayerWhoMovesIndex()
   }
 

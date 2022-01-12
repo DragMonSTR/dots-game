@@ -34,9 +34,12 @@ export default class Cell {
     return this.playerIndex === Game.playerWhoMovesIndex;
   }
 
-  addDot() {
-    this.dotsNumber++
-    this.componentContext.playAddDotAnimation()
+  clicked() {
+    if (!this.checkIfAvailableForClick()) {
+      return
+    }
+    this.addDot()
+    Game.cellClicked()
   }
 
   checkIfNeedToExplode() {
@@ -56,6 +59,11 @@ export default class Cell {
     }
   }
 
+
+  addDot() {
+    this.dotsNumber++
+    this.componentContext.playAddDotAnimation()
+  }
 
   getNeighbourCells() {
     const neighbourCells = []

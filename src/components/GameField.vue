@@ -9,9 +9,8 @@
         <Cell
           class="matrix__cell"
           v-for="j in width"
-          :key="width * i + j"
-          :cell-info="getCellInfo(i - 1, j - 1)"
-          @click="cellClicked(i - 1, j - 1)"
+          :key="width * (i - 1) + j - 1"
+          :index="width * (i - 1) + j - 1"
         />
       </div>
     </div>
@@ -29,14 +28,6 @@ export default {
   computed: {
     width: () => GameField.getWidth(),
     height: () => GameField.getHeight()
-  },
-  methods: {
-    getCellInfo(verticalIndex, horizontalIndex) {
-      return GameField.getCellByPosition(verticalIndex, horizontalIndex)
-    },
-    cellClicked(verticalIndex, horizontalIndex) {
-      Game.cellClicked(verticalIndex, horizontalIndex)
-    }
   },
   mounted() {
     Game.start(10)

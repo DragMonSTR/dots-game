@@ -2,15 +2,16 @@
   <div class="cell">
     <div
       class="cell__circle"
-      :class="{'cell__circle-hovered': circleHovered}"
       ref="circle"
-      :style="{'background-color': getCellColor(cellInfo)}"
+      :class="{'cell__circle-hovered': circleHovered}"
+      :style="{'background-color': circleColor}"
       @mouseenter="mouseEntered"
       @mouseleave="circleHovered = false"
+      @click="clicked"
     >
       <div
         class="cell__dot"
-        v-for="i in cellInfo.dotsNumber"
+        v-for="i in cell.dotsNumber"
         :key="i"
       ></div>
     </div>
@@ -22,14 +23,12 @@ import {ref} from "vue"
 import Game from "@/assets/gameLogic/game"
 import AnimationParameters from "@/assets/animation/animationParameters"
 import MyAnimation from "@/assets/animation/myAnimation"
+import GameField from "@/assets/gameLogic/gameField"
 
 export default {
   name: "Cell",
   props: {
-    cellInfo: {
-      type: Object,
-      required: true
-    }
+    index: {type: Number, required: true}
   },
   data: () => ({
     animationDuration: {
@@ -37,24 +36,34 @@ export default {
     },
     circleHovered: false
   }),
-  methods: {
-    getCellColor(cellInfo) {
-      if (cellInfo.playerIndex === null) {
+  computed: {
+    cell() {
+      return GameField.getCellByIndex(this.index)
+    },
+    circleColor() {
+      const playerIndex = this.cell.playerIndex
+      if (playerIndex === null) {
         return "#fff"
       }
-      const player = Game.playerArray[cellInfo.playerIndex]
+
+      const player = Game.playerArray[playerIndex]
       return player.color
-    },
+    }
+  },
+  methods: {
     mouseEntered() {
-      if (this.cellInfo.checkIfAvailableForClick()) {
+      if (this.cell.checkIfAvailableForClick()) {
         this.circleHovered = true
       }
+    },
+    clicked() {
+      this.cell.clicked()
     },
     playAddDotAnimation() {
       const animationParameters = new AnimationParameters()
       animationParameters.setDuration(this.animationDuration.addDot)
       animationParameters.setRenderFunction(value => {
-        this.circle.style.transform = `scale(${value})`
+        this.circle.style.transform = `scale(${2 - value})`
       })
       animationParameters.setTimingFunction(MyAnimation.easeOutElastic)
 
@@ -65,11 +74,10 @@ export default {
     }
   },
   mounted() {
-    this.cellInfo.setComponentContext(this)
+    this.cell.setComponentContext(this)
   },
   setup() {
     const circle = ref(null)
-
     return {
       circle
     }
@@ -89,12 +97,13 @@ export default {
 
   border-radius: 50%;
 
-  transition: transform .2s ease;
+  transition: transform .2s ease,
+  background-color .2s ease;
 }
 
 .cell__circle-hovered {
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1);
 }
 
 

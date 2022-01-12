@@ -40,7 +40,7 @@ export default class Cell {
   }
 
   checkIfNeedToExplode() {
-    return this.dotsNumber >= 4;
+    return this.dotsNumber >= 5;
   }
 
   explode() {
@@ -92,8 +92,8 @@ export default class Cell {
   summarizeDotsAfterExplosionCycle() {
     this.dotsNumber += this.newDotsAfterExplosionCycle
     this.newDotsAfterExplosionCycle = 0
-    if (this.dotsNumber > 4) {
-      this.dotsNumber = 4
+    if (this.dotsNumber > 5) {
+      this.dotsNumber = 5
     }
   }
 }

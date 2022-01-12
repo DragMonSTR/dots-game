@@ -11,8 +11,13 @@
     >
       <div
         class="cell__dot"
-        v-for="i in cell.dotsNumber"
+        v-for="(position, i) in dotsPosition"
         :key="i"
+        :class="{'cell__dot-hidden': i >= cell.dotsNumber}"
+        :style="{
+          'top': position.top,
+          'left': position.left
+        }"
       ></div>
     </div>
   </div>
@@ -48,6 +53,58 @@ export default {
 
       const player = Game.playerArray[playerIndex]
       return player.color
+    },
+    dotsPosition() {
+      switch (this.cell.dotsNumber) {
+        case 1:
+          return [
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'}
+          ]
+        case 2:
+          return [
+            {top: '50%', left: '30%'},
+            {top: '50%', left: '70%'},
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'}
+          ]
+        case 3:
+          return [
+            {top: '25%', left: '50%'},
+            {top: '65%', left: '30%'},
+            {top: '65%', left: '70%'},
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'}
+          ]
+        case 4:
+          return [
+            {top: '30%', left: '30%'},
+            {top: '30%', left: '70%'},
+            {top: '70%', left: '30%'},
+            {top: '70%', left: '70%'},
+            {top: '50%', left: '50%'}
+          ]
+        case 5:
+          return [
+            {top: '30%', left: '30%'},
+            {top: '30%', left: '70%'},
+            {top: '70%', left: '30%'},
+            {top: '70%', left: '70%'},
+            {top: '50%', left: '50%'}
+          ]
+        default:
+          return [
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'},
+            {top: '50%', left: '50%'}
+          ]
+      }
     }
   },
   methods: {
@@ -87,13 +144,9 @@ export default {
 
 <style scoped>
 .cell__circle {
+  position: relative;
   width: 65%;
   height: 65%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 
   border-radius: 50%;
 
@@ -108,12 +161,23 @@ export default {
 
 
 .cell__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 20%;
   height: 20%;
-  margin-right: 20%;
-  transform: translateX(50%);
+  transform: translate(-50%, -50%);
 
   background-color: #fff;
   border-radius: 50%;
+
+  transition: border-radius .2s ease,
+  top .2s ease,
+  left .2s ease;
+}
+
+.cell__dot-hidden {
+  width: 0;
+  height: 0;
 }
 </style>

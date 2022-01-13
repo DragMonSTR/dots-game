@@ -28,7 +28,7 @@ export default class Cell {
   }
 
   checkIfAvailableForClick() {
-    if (!Game.moveAvailable) {
+    if (!Game.getMoveAvailable()) {
       return false
     }
     return this.playerIndex === Game.playerWhoMovesIndex;

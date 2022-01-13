@@ -1,8 +1,9 @@
 <template>
-  <div class="cell">
+  <div class="cell" :class="{'cell-disabled': disabledStatus}">
     <div class="cell__bullets"
          ref="bullets">
       <div
+        v-if="cell.verticalIndex > 0"
         class="cell__bullet"
         :style="{
           'transform-origin': `center ${bulletOffset}%`,
@@ -10,6 +11,7 @@
           'background-color': circleColor
       }"></div>
       <div
+        v-if="cell.horizontalIndex < gameWidth - 1"
         class="cell__bullet"
         :style="{
           'transform-origin': `center ${bulletOffset}%`,
@@ -17,6 +19,7 @@
           'background-color': circleColor
       }"></div>
       <div
+        v-if="cell.verticalIndex < gameHeight - 1"
         class="cell__bullet"
         :style="{
           'transform-origin': `center ${bulletOffset}%`,
@@ -24,6 +27,7 @@
           'background-color': circleColor
       }"></div>
       <div
+        v-if="cell.horizontalIndex > 0"
         class="cell__bullet"
         :style="{
           'transform-origin': `center ${bulletOffset}%`,
@@ -74,6 +78,8 @@ export default {
     cell() {
       return GameField.getCellByIndex(this.index)
     },
+    gameWidth: () => GameField.getWidth(),
+    gameHeight: () => GameField.getHeight(),
     circleColor() {
       const playerIndex = this.cell.playerIndex
       if (playerIndex === null) {
@@ -134,6 +140,12 @@ export default {
             {left: '50%', top: '50%'}
           ]
       }
+    },
+    disabledStatus() {
+      if (!Game.getMoveAvailable()) {
+        return false
+      }
+      return !this.cell.checkIfAvailableForClick()
     }
   },
   methods: {
@@ -199,6 +211,12 @@ export default {
   height: 100%;
   flex: 1 1 auto;
   text-align: center;
+
+  transition: background-color .5s ease;
+}
+
+.cell-disabled {
+  background-color: #ffea84;
 }
 
 

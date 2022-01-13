@@ -99,7 +99,7 @@ export default class GameField {
 
       cellsToExplode = this.getCellsToExplode()
       if (!cellsToExplode.length) {
-        Game.moveAvailable = true
+        Game.moveAvailable.value = true
         return
       }
 

@@ -1,9 +1,10 @@
 import GameField from "@/assets/gameLogic/gameField"
-import Player from "@/assets/gameLogic/player";
+import Player from "@/assets/gameLogic/player"
+import {ref} from "vue"
 
 export default class Game {
   static started = false
-  static moveAvailable = true
+  static moveAvailable = ref(true)
 
   static playerArray = []
   static playerWhoMovesIndex = 0
@@ -16,13 +17,17 @@ export default class Game {
 
     function generatePlayers() {
       Game.playerArray.push(new Player("monkey", "#5a5"))
-      //Game.playerArray.push(new Player("cat", "#55a"))
+      Game.playerArray.push(new Player("cat", "#55a"))
       //Game.playerArray.push(new Player("dog", "#a55"))
     }
   }
 
+  static getMoveAvailable() {
+    return this.moveAvailable.value
+  }
+
   static cellClicked() {
-    this.moveAvailable = false
+    this.moveAvailable.value = false
     GameField.runExplosions()
     this.switchPlayerWhoMovesIndex()
   }

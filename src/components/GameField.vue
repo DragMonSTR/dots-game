@@ -37,8 +37,14 @@ export default {
 
 <style scoped>
 .game-field {
-  background-color: #dcca71;
+  background-color: #ffe25b;
 }
+
+/*
+light-yellow: #ffe25b
+light-orange: #ffb820
+dark-orange: #ef7527
+ */
 
 
 .matrix {

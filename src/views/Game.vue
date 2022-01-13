@@ -1,16 +1,18 @@
 <template>
   <div class="game">
+    <Statistics class="game__statistics"/>
     <GameField class="game__game-field"/>
   </div>
 </template>
 
 <script>
 import GameField from "@/components/GameField"
+import Statistics from "@/components/Statistics";
 
 
 export default {
   name: "Game",
-  components: {GameField}
+  components: {Statistics, GameField}
 }
 </script>
 
@@ -19,9 +21,12 @@ export default {
   height: 100vh;
 
   display: flex;
-  justify-content: center;
 }
 
+
+.game__statistics {
+  flex: 1 1 auto;
+}
 
 .game__game-field {
   width: 100vh;

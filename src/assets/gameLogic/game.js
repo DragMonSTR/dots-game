@@ -6,7 +6,7 @@ export default class Game {
   static started = false
   static moveAvailable = ref(true)
 
-  static playerArray = []
+  static playerArray = ref([])
   static playerWhoMovesIndex = 0
 
   static start(gameFieldSideSize = 10) {
@@ -16,9 +16,9 @@ export default class Game {
     this.started = true
 
     function generatePlayers() {
-      Game.playerArray.push(new Player("monkey", "#5a5"))
-      Game.playerArray.push(new Player("cat", "#55a"))
-      //Game.playerArray.push(new Player("dog", "#a55"))
+      Game.playerArray.value.push(new Player("monkey", "#5a5"))
+      Game.playerArray.value.push(new Player("cat", "#55a"))
+      //Game.playerArray.value.push(new Player("dog", "#a55"))
     }
   }
 
@@ -35,7 +35,7 @@ export default class Game {
 
   static switchPlayerWhoMovesIndex() {
     this.playerWhoMovesIndex++
-    if (this.playerWhoMovesIndex === this.playerArray.length) {
+    if (this.playerWhoMovesIndex === this.playerArray.value.length) {
       this.playerWhoMovesIndex = 0
     }
   }

@@ -55,7 +55,7 @@ export default class GameField {
     const rightBottomCell = this.getCellByPosition(maxVerticalIndex, maxHorizontalIndex)
     const leftBottomCell = this.getCellByPosition(maxVerticalIndex, minHorizontalIndex)
 
-    const playersNumber = Game.playerArray.length
+    const playersNumber = Game.playerArray.value.length
     switch (playersNumber) {
       case 1:
         leftTopCell.giveToPlayer(0, 1)

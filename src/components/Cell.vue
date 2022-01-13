@@ -86,7 +86,7 @@ export default {
         return "#fff"
       }
 
-      const player = Game.playerArray[playerIndex]
+      const player = Game.playerArray.value[playerIndex]
       return player.color
     },
     dotsPosition() {

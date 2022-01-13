@@ -18,6 +18,13 @@ export default class MyAnimation {
     })
   }
 
+
+  static durations = {
+    cellBullets: 300,
+    addingDot: 1000
+  }
+
+
   static linear(timeFraction) {
     return timeFraction
   }

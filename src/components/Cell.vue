@@ -58,51 +58,51 @@ export default {
       switch (this.cell.dotsNumber) {
         case 1:
           return [
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'}
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'}
           ]
         case 2:
           return [
-            {top: '50%', left: '30%'},
-            {top: '50%', left: '70%'},
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'}
+            {left: '30%', top: '50%'},
+            {left: '70%', top: '50%'},
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'}
           ]
         case 3:
           return [
-            {top: '25%', left: '50%'},
-            {top: '65%', left: '30%'},
-            {top: '65%', left: '70%'},
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'}
+            {left: '50%', top: '25%'},
+            {left: '70%', top: '65%'},
+            {left: '30%', top: '65%'},
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'}
           ]
         case 4:
           return [
-            {top: '30%', left: '30%'},
-            {top: '30%', left: '70%'},
-            {top: '70%', left: '30%'},
-            {top: '70%', left: '70%'},
-            {top: '50%', left: '50%'}
+            {left: '70%', top: '30%'},
+            {left: '30%', top: '70%'},
+            {left: '30%', top: '30%'},
+            {left: '70%', top: '70%'},
+            {left: '50%', top: '50%'}
           ]
         case 5:
           return [
-            {top: '30%', left: '30%'},
-            {top: '30%', left: '70%'},
-            {top: '70%', left: '30%'},
-            {top: '70%', left: '70%'},
-            {top: '50%', left: '50%'}
+            {left: '70%', top: '70%'},
+            {left: '30%', top: '30%'},
+            {left: '70%', top: '30%'},
+            {left: '30%', top: '70%'},
+            {left: '50%', top: '50%'}
           ]
         default:
           return [
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'},
-            {top: '50%', left: '50%'}
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'},
+            {left: '50%', top: '50%'}
           ]
       }
     }
@@ -171,8 +171,7 @@ export default {
   background-color: #fff;
   border-radius: 50%;
 
-  transition: border-radius .2s ease,
-  top .2s ease,
+  transition: top .2s ease,
   left .2s ease;
 }
 

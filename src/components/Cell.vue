@@ -40,7 +40,7 @@
       ref="circle"
       :class="{'cell__circle-hovered': circleHovered}"
       :style="{'background-color': circleColor}"
-      @mouseenter="mouseEntered"
+      @mousemove="mouseMoved"
       @mouseleave="circleHovered = false"
       @click="clicked"
     >
@@ -149,12 +149,13 @@ export default {
     }
   },
   methods: {
-    mouseEntered() {
+    mouseMoved() {
       if (this.cell.checkIfAvailableForClick()) {
         this.circleHovered = true
       }
     },
     clicked() {
+      this.circleHovered = false
       this.cell.clicked()
     },
     playAddDotAnimation() {
@@ -212,7 +213,7 @@ export default {
   flex: 1 1 auto;
   text-align: center;
 
-  transition: background-color .5s ease;
+  transition: background-color 2s ease;
 }
 
 .cell-disabled {
@@ -252,13 +253,15 @@ export default {
 
   border-radius: 50%;
 
-  transition: background-color .2s ease;
+  transition: background-color .2s ease,
+  box-shadow .2s ease;
 
   z-index: 1;
 }
 
 .cell__circle-hovered {
   cursor: pointer;
+  box-shadow: 0 0 .8vw .3vw #fff;
 }
 
 

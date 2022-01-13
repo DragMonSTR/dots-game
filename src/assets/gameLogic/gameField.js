@@ -57,7 +57,10 @@ export default class GameField {
     const playersNumber = Game.playerArray.length
     switch (playersNumber) {
       case 1:
-        leftTopCell.giveToPlayer(0)
+        leftTopCell.giveToPlayer(0, 1)
+        this.getCellByIndex(1).giveToPlayer(0, 2)
+        this.getCellByIndex(2).giveToPlayer(0, 3)
+        this.getCellByIndex(3).giveToPlayer(0, 4)
         break
       case 2:
         leftTopCell.giveToPlayer(0)

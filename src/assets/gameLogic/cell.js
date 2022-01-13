@@ -51,7 +51,7 @@ export default class Cell {
 
     const neighbourCells = this.getNeighbourCells()
     for (let neighbourCell of neighbourCells) {
-      neighbourCell.playerIndex = this.playerIndex
+      neighbourCell.giveToPlayer(this.playerIndex)
       neighbourCell.addDotAfterExplosionCycle()
     }
   }

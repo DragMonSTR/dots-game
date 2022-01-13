@@ -39,6 +39,7 @@ export default class Cell {
       return
     }
     this.addDot()
+    this.componentContext.playAddDotAnimation()
     Game.cellClicked()
   }
 
@@ -48,10 +49,13 @@ export default class Cell {
 
   explode() {
     this.dotsNumber = 1
+    this.componentContext.playExplodeAnimation()
 
     const neighbourCells = this.getNeighbourCells()
     for (let neighbourCell of neighbourCells) {
-      neighbourCell.giveToPlayer(this.playerIndex)
+      if (neighbourCell.playerIndex !== this.playerIndex) {
+        neighbourCell.giveToPlayer(this.playerIndex, 0)
+      }
       neighbourCell.addDotAfterExplosionCycle()
     }
   }
@@ -59,7 +63,6 @@ export default class Cell {
 
   addDot() {
     this.dotsNumber++
-    this.componentContext.playAddDotAnimation()
   }
 
   getNeighbourCells() {

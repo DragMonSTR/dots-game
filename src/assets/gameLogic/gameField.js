@@ -1,6 +1,7 @@
 import Game from "@/assets/gameLogic/game"
 import Cell from "@/assets/gameLogic/cell"
 import {ref} from "vue"
+import MyAnimation from "@/assets/animation/myAnimation";
 
 export default class GameField {
   static width = ref(0)
@@ -92,17 +93,20 @@ export default class GameField {
     for (let cell of cellsToExplode) {
       cell.explode()
     }
-    this.summarizeDotsAfterExplosionCycle()
-
-    cellsToExplode = this.getCellsToExplode()
-    if (!cellsToExplode.length) {
-      Game.moveAvailable = true
-      return
-    }
 
     setTimeout(() => {
-      this.explodeCells(cellsToExplode)
-    }, 1000)
+      this.summarizeDotsAfterExplosionCycle()
+
+      cellsToExplode = this.getCellsToExplode()
+      if (!cellsToExplode.length) {
+        Game.moveAvailable = true
+        return
+      }
+
+      setTimeout(() => {
+        this.explodeCells(cellsToExplode)
+      }, MyAnimation.durations.addingDot)
+    }, MyAnimation.durations.cellBullets)
   }
 
 

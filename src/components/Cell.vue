@@ -1,5 +1,36 @@
 <template>
   <div class="cell">
+    <div class="cell__bullets"
+         ref="bullets">
+      <div
+        class="cell__bullet"
+        :style="{
+          'transform-origin': `center ${bulletOffset}%`,
+          'transform': `translate(-50%, -${bulletOffset}%) rotate(0deg)`,
+          'background-color': circleColor
+      }"></div>
+      <div
+        class="cell__bullet"
+        :style="{
+          'transform-origin': `center ${bulletOffset}%`,
+          'transform': `translate(-50%, -${bulletOffset}%) rotate(90deg)`,
+          'background-color': circleColor
+      }"></div>
+      <div
+        class="cell__bullet"
+        :style="{
+          'transform-origin': `center ${bulletOffset}%`,
+          'transform': `translate(-50%, -${bulletOffset}%) rotate(180deg)`,
+          'background-color': circleColor
+      }"></div>
+      <div
+        class="cell__bullet"
+        :style="{
+          'transform-origin': `center ${bulletOffset}%`,
+          'transform': `translate(-50%, -${bulletOffset}%) rotate(270deg)`,
+          'background-color': circleColor
+      }"></div>
+    </div>
     <div
       class="cell__circle"
       ref="circle"
@@ -36,10 +67,8 @@ export default {
     index: {type: Number, required: true}
   },
   data: () => ({
-    animationDuration: {
-      addDot: 1000
-    },
-    circleHovered: false
+    circleHovered: false,
+    bulletOffset: 350
   }),
   computed: {
     cell() {
@@ -118,16 +147,35 @@ export default {
     },
     playAddDotAnimation() {
       const animationParameters = new AnimationParameters()
-      animationParameters.setDuration(this.animationDuration.addDot)
-      animationParameters.setRenderFunction(value => {
-        this.circle.style.transform = `scale(${2 - value})`
-      })
+      animationParameters.setDuration(MyAnimation.durations.addingDot)
+      animationParameters.setRenderFunction(this.setCircleRadius)
       animationParameters.setTimingFunction(MyAnimation.easeOutElastic)
-
       MyAnimation.animate(animationParameters)
+    },
+    setCircleRadius(animationProgress) {
+      const scaleValue = 1.4 - 0.4 * animationProgress
+      this.circle.style.transform =
+        `translate(-50%, -50%) scale(${scaleValue})`
+    },
+    playExplodeAnimation() {
+      this.bullets.style.display = "block"
+
+      const animationParameters = new AnimationParameters()
+      animationParameters.setDuration(MyAnimation.durations.cellBullets)
+      animationParameters.setRenderFunction(this.setBulletOffset)
+      animationParameters.setTimingFunction(MyAnimation.easeInOut)
+      MyAnimation.animate(animationParameters)
+
       setTimeout(() => {
-        this.circle.style.transform = ""
-      }, this.animationDuration.addDot + 100)
+        this.bullets.style.display = "none"
+      }, MyAnimation.durations.cellBullets)
+    },
+    setBulletOffset(animationProgress) {
+      const startValue = 300
+      const finishValue = 650
+
+      const difference = finishValue - startValue
+      this.bulletOffset = startValue + animationProgress * difference
     }
   },
   mounted() {
@@ -135,28 +183,64 @@ export default {
   },
   setup() {
     const circle = ref(null)
+    const bullets = ref(null)
     return {
-      circle
+      circle,
+      bullets
     }
   }
 }
 </script>
 
 <style scoped>
-.cell__circle {
+.cell {
   position: relative;
+
+  height: 100%;
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+
+.cell__bullets {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  display: none;
+}
+
+.cell__bullet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12%;
+  height: 12%;
+
+  background-color: red;
+  border-radius: 50%;
+
+  z-index: 0;
+}
+
+
+.cell__circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 65%;
   height: 65%;
 
   border-radius: 50%;
 
-  transition: transform .2s ease,
-  background-color .2s ease;
+  transition: background-color .2s ease;
+
+  z-index: 1;
 }
 
 .cell__circle-hovered {
   cursor: pointer;
-  transform: scale(1);
 }
 
 

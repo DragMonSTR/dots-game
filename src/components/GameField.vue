@@ -53,14 +53,4 @@ export default {
   display: flex;
   align-items: center;
 }
-
-.matrix__cell {
-  height: 100%;
-  flex: 1 1 auto;
-  text-align: center;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 </style>

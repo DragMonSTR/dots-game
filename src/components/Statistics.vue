@@ -2,6 +2,7 @@
   <div class="statistics">
     <div class="player-list">
       <Player
+        class="player-list__element"
         v-for="(player, i) in players"
         :key="i"
         :player="player"
@@ -36,5 +37,13 @@ export default {
 
 .player-list {
   width: 100%;
+}
+
+.player-list__element {
+  margin: 0 0 80px 0;
+}
+
+.player-list__element:last-child {
+  margin: 0;
 }
 </style>

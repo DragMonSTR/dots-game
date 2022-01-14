@@ -88,7 +88,6 @@ export default class GameField {
     this.explodeCells(cellsToExplode)
   }
 
-
   static explodeCells(cellsToExplode) {
     for (let cell of cellsToExplode) {
       cell.explode()
@@ -107,6 +106,20 @@ export default class GameField {
         this.explodeCells(cellsToExplode)
       }, MyAnimation.durations.addingDot)
     }, MyAnimation.durations.cellBullets)
+  }
+
+
+  static countPlayerCellNumber(playerIndex) {
+    let cellNumber = 0
+
+    for (let i = 0; i < this.getSize(); i++) {
+      const cell = this.getCellByIndex(i)
+      if (cell.playerIndex === playerIndex) {
+        cellNumber++
+      }
+    }
+
+    return cellNumber
   }
 
 

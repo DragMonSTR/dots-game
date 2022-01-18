@@ -1,13 +1,17 @@
-import GameField from "@/assets/gameLogic/gameField";
-import Game from "@/assets/gameLogic/game";
+import GameField from "@/assets/gameLogic/gameField"
+import Game from "@/assets/gameLogic/game"
+import colorData from "@/assets/gameLogic/colorData"
 
 export default class Cell {
+  static maxDotsNumber = 4
+
   verticalIndex
   horizontalIndex
   playerIndex
   dotsNumber
   newDotsAfterExplosionCycle
   componentContext
+
 
   constructor(verticalIndex, horizontalIndex) {
     this.verticalIndex = verticalIndex
@@ -20,6 +24,16 @@ export default class Cell {
 
   setComponentContext(context) {
     this.componentContext = context
+  }
+
+  getColor() {
+    if (this.playerIndex === null) {
+      return colorData.emptyCell
+    }
+
+    const player = Game.playersArray.value[this.playerIndex]
+    const colorIndex = Math.min(this.dotsNumber, Cell.maxDotsNumber)
+    return player.colors[colorIndex - 1]
   }
 
   giveToPlayer(playerIndex, dotsNumber = 1) {

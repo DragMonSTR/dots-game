@@ -1,10 +1,15 @@
 import GameField from "@/assets/gameLogic/gameField";
 
 export default class Player {
-  constructor(index, name = "", color = "#f00") {
-    this.index = index
+  constructor(id, name) {
+    this.index = id
     this.name = name
-    this.color = color
+    this.colors = []
+  }
+
+
+  setColors(colors) {
+    this.colors = colors
   }
 
 

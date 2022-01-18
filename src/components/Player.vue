@@ -5,13 +5,13 @@
       v-if="position === 1"></div>
     <div
       class="player__position"
-      :style="{'background-color': player.color}"
+      :style="{'background-color': player.colors[3]}"
     >
       {{ position }}
     </div>
     <div
       class="player__name"
-      :style="{'background-color': player.color}"
+      :style="{'background-color': player.colors[3]}"
     >
       {{ player.name }}
     </div>
@@ -19,7 +19,7 @@
       <div
         class="player__score-bar"
         :style="{
-          'background-color': player.color,
+          'background-color': player.colors[0],
           'width': barWidthInPercent + '%'
         }">
         {{ player.countCellsNumber() }}
@@ -107,7 +107,6 @@ export default {
 
   color: #ffffff;
   border-radius: 70px 0 0 70px;
-  border-right: 1px solid #fff;
   overflow: hidden;
 }
 

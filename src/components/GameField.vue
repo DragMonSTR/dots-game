@@ -30,7 +30,7 @@ export default {
     height: () => GameField.getHeight()
   },
   mounted() {
-    Game.start(10)
+    Game.start(1)
   }
 }
 </script>

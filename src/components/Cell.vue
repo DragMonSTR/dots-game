@@ -81,13 +81,16 @@ export default {
     gameWidth: () => GameField.getWidth(),
     gameHeight: () => GameField.getHeight(),
     circleColor() {
+      return this.cell.getColor()
+
       const playerIndex = this.cell.playerIndex
       if (playerIndex === null) {
         return "#fff"
       }
 
-      const player = Game.playerArray.value[playerIndex]
-      return player.color
+      const player = Game.playersArray.value[playerIndex]
+      const dotsNumber = this.cell.dotsNumber
+      return player.colors[dotsNumber - 1]
     },
     dotsPosition() {
       switch (this.cell.dotsNumber) {

@@ -2,7 +2,7 @@
   <div class="player">
     <div
       class="player__crown"
-      v-if="player.place === 1"></div>
+      :class="{'player__crown-hidden': player.place !== 1}"></div>
     <div
       class="player__place"
       :style="{'background-color': player.colors[3]}"
@@ -64,12 +64,19 @@ export default {
   position: absolute;
   top: -30px;
   left: 15px;
-  transform: rotate(-30deg);
-
   width: 60px;
   height: 60px;
+  transform: rotate(-30deg);
+
+  opacity: 1;
   background: url("../../public/img/crown.png") no-repeat center;
   background-size: contain;
+
+  transition: opacity .2s ease;
+}
+
+.player__crown-hidden {
+  opacity: 0;
 }
 
 

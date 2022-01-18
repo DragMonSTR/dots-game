@@ -109,6 +109,19 @@ export default class GameField {
   }
 
 
+  static countMaxPlayerCellNumber() {
+    let maxPlayerCellNumber = 0
+
+    for (let player of Game.playerArray.value) {
+      const playerCellNumber = this.countPlayerCellNumber(player.index)
+      if (playerCellNumber > maxPlayerCellNumber) {
+        maxPlayerCellNumber = playerCellNumber
+      }
+    }
+
+    return maxPlayerCellNumber
+  }
+
   static countPlayerCellNumber(playerIndex) {
     let cellNumber = 0
 

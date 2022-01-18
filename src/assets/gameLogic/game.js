@@ -17,8 +17,8 @@ export default class Game {
 
     function generatePlayers() {
       Game.playerArray.value.push(new Player(0, "monkey", "#5a5"))
-      Game.playerArray.value.push(new Player(2, "cat", "#55a"))
-      //Game.playerArray.value.push(new Player(3, "dog", "#a55"))
+      Game.playerArray.value.push(new Player(1, "cat", "#55a"))
+      //Game.playerArray.value.push(new Player(2, "dog", "#a55"))
     }
   }
 

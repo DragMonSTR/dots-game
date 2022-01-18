@@ -11,6 +11,7 @@ export default class Game {
   static playersArray = ref([])
   static playerWhoMovesIndex = 0
 
+
   static start(playersNumber = 2, gameFieldSideSize = 10) {
     this.generatePlayers(playersNumber)
     this.generateGameField(gameFieldSideSize)
@@ -84,6 +85,92 @@ export default class Game {
     this.playerWhoMovesIndex++
     if (this.playerWhoMovesIndex === this.playersArray.value.length) {
       this.playerWhoMovesIndex = 0
+    }
+  }
+
+  static updatePlayersPlaces() {
+    const playersArray = Game.playersArray.value
+    let playersIndexes = getPlayersIndexes()
+    const sortedPlayersIndexes = getSortedPlayersIndexes()
+    givePlacesToPlayers()
+
+    for (let player of Game.playersArray.value) {
+      console.log(player)
+    }
+    console.log("--------------------------------")
+
+
+    function getPlayersIndexes() {
+      const playerIndexes = new Array(playersArray.length)
+
+      for (let i in playersArray) {
+        const player = playersArray[i]
+        playerIndexes[i] = player.id
+      }
+
+      return playerIndexes
+    }
+
+    function getSortedPlayersIndexes() {
+      const sortedPlayersIndexes = []
+
+      while (playersIndexes.length) {
+        const bestPlayerId = findBestPlayerId(playersIndexes)
+        sortedPlayersIndexes.push(bestPlayerId)
+        playersIndexes = playersIndexes.filter(playerId => {
+          return playerId !== bestPlayerId
+        })
+      }
+
+      return sortedPlayersIndexes
+    }
+
+    function findBestPlayerId(playersIndexes) {
+      let bestPlayerId = playersIndexes[0]
+      let bestPlayer = Game.getPlayer(bestPlayerId)
+
+      for (let playerId of playersIndexes) {
+        const player = Game.getPlayer(playerId)
+        if (player.countCellsNumber() < bestPlayer.countCellsNumber()) {
+          continue
+        }
+
+        if (player.countCellsNumber() > bestPlayer.countCellsNumber() ||
+          player.countDotsNumber() > bestPlayer.countDotsNumber()) {
+          bestPlayer = player
+          bestPlayerId = playerId
+        }
+      }
+
+      return bestPlayerId
+    }
+
+    function givePlacesToPlayers() {
+      let place = 0
+      let previousPlayer
+
+      for (let playerId of sortedPlayersIndexes) {
+        const player = Game.getPlayer(playerId)
+
+        if (previousPlayer &&
+          previousPlayer.countCellsNumber() === player.countCellsNumber() &&
+          previousPlayer.countDotsNumber() === player.countDotsNumber()) {
+
+        } else {
+          place++
+          if (previousPlayer) {
+            console.log("Previous player: ",
+              previousPlayer.countCellsNumber(),
+              previousPlayer.countDotsNumber())
+            console.log("Player: ",
+              player.countCellsNumber(),
+              player.countDotsNumber())
+          }
+        }
+
+        player.place = place
+        previousPlayer = player
+      }
     }
   }
 }

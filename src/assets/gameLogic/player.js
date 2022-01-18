@@ -2,7 +2,7 @@ import GameField from "@/assets/gameLogic/gameField";
 
 export default class Player {
   constructor(id, name) {
-    this.index = id
+    this.id = id
     this.name = name
     this.colors = []
   }
@@ -14,10 +14,10 @@ export default class Player {
 
 
   countCellsNumber() {
-    return GameField.countPlayerCellNumber(this.index)
+    return GameField.countPlayerCellNumber(this.id)
   }
 
   countDotsNumber() {
-    return GameField.countPlayerDotsNumber(this.index)
+    return GameField.countPlayerDotsNumber(this.id)
   }
 }

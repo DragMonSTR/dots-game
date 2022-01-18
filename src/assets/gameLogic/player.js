@@ -16,4 +16,8 @@ export default class Player {
   countCellsNumber() {
     return GameField.countPlayerCellNumber(this.index)
   }
+
+  countDotsNumber() {
+    return GameField.countPlayerDotsNumber(this.index)
+  }
 }

@@ -135,6 +135,19 @@ export default class GameField {
     return cellNumber
   }
 
+  static countPlayerDotsNumber(playerIndex) {
+    let dotsNumber = 0
+
+    for (let i = 0; i < this.getSize(); i++) {
+      const cell = this.getCellByIndex(i)
+      if (cell.playerIndex === playerIndex) {
+        dotsNumber += cell.dotsNumber
+      }
+    }
+
+    return dotsNumber
+  }
+
 
   static fillCellArrayWithEmptyCells() {
     this.cellArray.value.length = this.getSize()

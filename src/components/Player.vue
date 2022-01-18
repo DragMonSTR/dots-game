@@ -2,12 +2,12 @@
   <div class="player">
     <div
       class="player__crown"
-      v-if="position === 1"></div>
+      v-if="player.place === 1"></div>
     <div
-      class="player__position"
+      class="player__place"
       :style="{'background-color': player.colors[3]}"
     >
-      {{ position }}
+      {{ player.place }}
     </div>
     <div
       class="player__name"
@@ -37,10 +37,6 @@ export default {
   props: {
     player: {
       type: Object,
-      required: true
-    },
-    position: {
-      type: Number,
       required: true
     }
   },
@@ -77,7 +73,7 @@ export default {
 }
 
 
-.player__position {
+.player__place {
   width: 70px;
   height: 70px;
   margin: 0 10px 0 0;

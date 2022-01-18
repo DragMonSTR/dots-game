@@ -6,7 +6,6 @@
         v-for="(player, i) in players"
         :key="i"
         :player="player"
-        :position="i + 1"
       />
     </div>
   </div>

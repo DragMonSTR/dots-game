@@ -31,7 +31,7 @@ export default class Cell {
       return colorData.emptyCell
     }
 
-    const player = Game.playersArray.value[this.playerIndex]
+    const player = Game.getPlayer(this.playerIndex)
     const colorIndex = Math.min(this.dotsNumber, Cell.maxDotsNumber)
     return player.colors[colorIndex - 1]
   }

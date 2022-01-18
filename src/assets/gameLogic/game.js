@@ -65,6 +65,10 @@ export default class Game {
   }
 
 
+  static getPlayer(playerIndex) {
+    return this.playersArray.value[playerIndex]
+  }
+
   static getMoveAvailable() {
     return this.moveAvailable.value
   }

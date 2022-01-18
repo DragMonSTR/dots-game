@@ -6,6 +6,7 @@
         v-for="(player, i) in players"
         :key="i"
         :player="player"
+        :position="i + 1"
       />
     </div>
   </div>
@@ -14,6 +15,7 @@
 <script>
 import Player from "@/components/Player"
 import Game from "@/assets/gameLogic/game"
+import GameField from "@/assets/gameLogic/gameField";
 
 export default {
   name: "Statistics",
@@ -29,6 +31,7 @@ export default {
 <style scoped>
 .statistics {
   display: flex;
+  flex-direction: column;
   align-items: center;
 
   background-color: #ffe;
@@ -36,11 +39,12 @@ export default {
 
 
 .player-list {
+  margin: 100px 0 0 0;
   width: 100%;
 }
 
 .player-list__element {
-  margin: 0 0 80px 0;
+  margin: 0 0 50px 0;
 }
 
 .player-list__element:last-child {

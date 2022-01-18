@@ -95,6 +95,7 @@ export default class GameField {
 
     setTimeout(() => {
       this.summarizeDotsAfterExplosionCycle()
+      Game.updatePlayersPlaces()
 
       cellsToExplode = this.getCellsToExplode()
       if (!cellsToExplode.length) {

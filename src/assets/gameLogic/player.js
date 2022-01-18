@@ -5,6 +5,7 @@ export default class Player {
     this.id = id
     this.name = name
     this.colors = []
+    this.place = 1
   }
 
 

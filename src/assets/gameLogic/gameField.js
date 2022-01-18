@@ -55,7 +55,7 @@ export default class GameField {
     const rightBottomCell = this.getCellByPosition(maxVerticalIndex, maxHorizontalIndex)
     const leftBottomCell = this.getCellByPosition(maxVerticalIndex, minHorizontalIndex)
 
-    const playersNumber = Game.playerArray.value.length
+    const playersNumber = Game.playersArray.value.length
     switch (playersNumber) {
       case 1:
         leftTopCell.giveToPlayer(0, 1)
@@ -112,7 +112,7 @@ export default class GameField {
   static countMaxPlayerCellNumber() {
     let maxPlayerCellNumber = 0
 
-    for (let player of Game.playerArray.value) {
+    for (let player of Game.playersArray.value) {
       const playerCellNumber = this.countPlayerCellNumber(player.index)
       if (playerCellNumber > maxPlayerCellNumber) {
         maxPlayerCellNumber = playerCellNumber

@@ -22,7 +22,7 @@ export default {
   components: {Player},
   computed: {
     players() {
-      return Game.playerArray.value
+      return Game.playersArray.value
     }
   }
 }

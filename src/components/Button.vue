@@ -37,6 +37,7 @@ export default {
   padding: 20px 50px;
 
   display: flex;
+  align-items: center;
 
   border: 2px solid #aaa;
   border-radius: 8px;

@@ -1,9 +1,10 @@
 <template>
   <div class="rules">
-    <Button
+    <MyButton
       class="back-button"
       :text="getStringResource('mainMenu')"
       icon-name="back"
+      @click="$router.push('/')"
     />
 
     <div class="rules__text">
@@ -13,12 +14,12 @@
 </template>
 
 <script>
-import Button from "@/components/Button"
+import MyButton from "@/components/MyButton"
 import {mapGetters} from "vuex"
 
 export default {
   name: "Rules",
-  components: {Button},
+  components: {MyButton},
   computed: {
     ...mapGetters({
       getStringResource: "getStringResource"

@@ -1,15 +1,48 @@
 <template>
   <div class="home">
-    <h1>This is home page</h1>
+    <div class="buttons">
+      <Button
+        class="buttons__button"
+        text="start game"
+        icon-name="play"
+      />
+      <Button
+        class="buttons__button"
+        text="rules"
+        icon-name="rules"
+      />
+      <Button
+        class="buttons__button"
+        text="language"
+        icon-name="language"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import Button from "@/components/Button";
+
 export default {
-  name: "Home"
+  name: "Home",
+  components: {Button}
 }
 </script>
 
 <style scoped>
+.home {
+  width: 100vw;
+  height: 100vh;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #ffe;
+}
+
+
+.buttons__button {
+  margin: 0 0 50px 0;
+}
 </style>

@@ -1,12 +1,14 @@
 <template>
   <div class="statistics">
     <div class="player-list">
-      <Player
-        class="player-list__element"
-        v-for="(player, i) in players"
-        :key="i"
-        :player="player"
-      />
+      <TransitionGroup name="players-list">
+        <Player
+          class="player-list__element"
+          v-for="player in players"
+          :key="player.id"
+          :player="player"
+        />
+      </TransitionGroup>
     </div>
   </div>
 </template>
@@ -21,7 +23,11 @@ export default {
   components: {Player},
   computed: {
     players() {
-      return Game.playersArray.value
+      const playersArray = Game.getPlayersArray().slice()
+      playersArray.sort((player1, player2) => {
+        return player1.place - player2.place
+      })
+      return playersArray
     }
   }
 }
@@ -48,5 +54,10 @@ export default {
 
 .player-list__element:last-child {
   margin: 0;
+}
+
+
+.players-list-move {
+  transition: transform .4s ease;
 }
 </style>

@@ -66,6 +66,10 @@ export default class Game {
   }
 
 
+  static getPlayersArray() {
+    return this.playersArray.value
+  }
+
   static getPlayer(playerIndex) {
     return this.playersArray.value[playerIndex]
   }
@@ -93,11 +97,6 @@ export default class Game {
     let playersIndexes = getPlayersIndexes()
     const sortedPlayersIndexes = getSortedPlayersIndexes()
     givePlacesToPlayers()
-
-    for (let player of Game.playersArray.value) {
-      console.log(player)
-    }
-    console.log("--------------------------------")
 
 
     function getPlayersIndexes() {
@@ -158,14 +157,6 @@ export default class Game {
 
         } else {
           place++
-          if (previousPlayer) {
-            console.log("Previous player: ",
-              previousPlayer.countCellsNumber(),
-              previousPlayer.countDotsNumber())
-            console.log("Player: ",
-              player.countCellsNumber(),
-              player.countDotsNumber())
-          }
         }
 
         player.place = place

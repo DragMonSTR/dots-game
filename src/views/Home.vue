@@ -11,6 +11,7 @@
         class="buttons__button"
         text="rules"
         icon-name="rules"
+        @click="$router.push('/rules')"
       />
       <Button
         class="buttons__button"

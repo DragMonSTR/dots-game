@@ -2,7 +2,7 @@
   <div class="rules">
     <Button
       class="back-button"
-      text="main menu"
+      :text="getStringResource('mainMenu')"
       icon-name="back"
     />
 
@@ -13,10 +13,17 @@
 </template>
 
 <script>
-import Button from "@/components/Button";
+import Button from "@/components/Button"
+import {mapGetters} from "vuex"
+
 export default {
   name: "Rules",
-  components: {Button}
+  components: {Button},
+  computed: {
+    ...mapGetters({
+      getStringResource: "getStringResource"
+    })
+  }
 }
 </script>
 

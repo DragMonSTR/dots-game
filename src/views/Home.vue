@@ -5,6 +5,7 @@
         class="buttons__button"
         text="start game"
         icon-name="play"
+        @click="$router.push('/setGame')"
       />
       <Button
         class="buttons__button"

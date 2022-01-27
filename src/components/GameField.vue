@@ -30,7 +30,7 @@ export default {
     height: () => GameField.getHeight()
   },
   mounted() {
-    Game.start(1)
+    Game.start(2)
   }
 }
 </script>
@@ -39,12 +39,6 @@ export default {
 .game-field {
   background-color: #ffe25b;
 }
-
-/*
-light-yellow: #ffe25b
-light-orange: #ffb820
-dark-orange: #ef7527
- */
 
 
 .matrix {

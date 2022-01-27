@@ -3,19 +3,19 @@
     <div class="buttons">
       <Button
         class="buttons__button"
-        text="start game"
+        :text="getStringResource('startGame')"
         icon-name="play"
         @click="$router.push('/setGame')"
       />
       <Button
         class="buttons__button"
-        text="rules"
+        :text="getStringResource('rules')"
         icon-name="rules"
         @click="$router.push('/rules')"
       />
       <Button
         class="buttons__button"
-        text="language"
+        :text="getStringResource('language')"
         icon-name="language"
       />
     </div>
@@ -23,11 +23,17 @@
 </template>
 
 <script>
-import Button from "@/components/Button";
+import Button from "@/components/Button"
+import {mapGetters} from "vuex"
 
 export default {
   name: "Home",
-  components: {Button}
+  components: {Button},
+  computed: {
+    ...mapGetters({
+      getStringResource: "getStringResource"
+    })
+  }
 }
 </script>
 

@@ -28,9 +28,6 @@ export default {
   computed: {
     width: () => GameField.getWidth(),
     height: () => GameField.getHeight()
-  },
-  mounted() {
-    Game.start(2)
   }
 }
 </script>

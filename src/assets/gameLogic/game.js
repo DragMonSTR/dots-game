@@ -19,6 +19,8 @@ export default class Game {
   }
 
   static generatePlayers(playersNumber) {
+    this.playersArray.value = []
+
     const playerNames = getPlayerNames()
     fillPlayersArray(playerNames)
     setPlayersColors()

@@ -44,6 +44,11 @@ export default {
 }
 
 
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
 .buttons__button {
   margin: 0 0 50px 0;
 }

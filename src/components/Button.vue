@@ -36,7 +36,7 @@ export default {
 .button {
   padding: 20px 50px;
 
-  display: flex;
+  display: inline-flex;
   align-items: center;
 
   border: 2px solid #aaa;

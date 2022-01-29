@@ -100,7 +100,6 @@ export default class Game {
 
   static start() {
     this.playerWhoMovesId = this.getPlayersIdArray()[0]
-    this.generateGameField(10)
     this.started = true
   }
 

@@ -12,45 +12,6 @@ export default class Game {
   static playerWhoMovesIndex = 0
 
 
-  static start(playersNumber = 2, gameFieldSideSize = 10) {
-    this.generatePlayers(playersNumber)
-    this.generateGameField(gameFieldSideSize)
-    this.started = true
-  }
-
-  static generatePlayers(playersNumber, randomNames) {
-    this.playersArray.value = []
-
-    const playerNames = randomNames.slice(0, playersNumber)
-    fillPlayersArray(playerNames)
-    setPlayersColors()
-
-    function fillPlayersArray(playerNames) {
-      for (let i = 0; i < playersNumber; i++) {
-        const player = new Player(i, playerNames[i])
-        Game.playersArray.value.push(player)
-      }
-    }
-
-    function setPlayersColors() {
-      const colors = colorData.playersColors.slice()
-
-      for (let player of Game.playersArray.value) {
-        const colorIndex = getRandomInt(0, colors.length)
-        const playerColors = colors[colorIndex]
-        player.setColors(playerColors)
-        colors.splice(colorIndex, 1)
-      }
-    }
-
-
-    function getRandomInt(min, max) {
-      min = Math.ceil(min)
-      max = Math.floor(max)
-      return Math.floor(Math.random() * (max - min)) + min
-    }
-  }
-
   static addPlayer(randomNames) {
     const id = Game.getPlayersArray().length
     const name = generatePlayerName()

@@ -11,7 +11,7 @@
     <div class="content">
       <div class="content__players players">
         <div class="players__title">
-          {{getStringResource('players')}}
+          {{ getStringResource('players') }}
         </div>
         <div class="players__list">
           <MenuPlayer
@@ -21,10 +21,17 @@
             :player="player"
           />
         </div>
-        <div class="players__add-button">
+        <div
+          class="players__add-button"
+          :class="{
+            'players__add-button-hidden': !abilityToAddPlayer
+          }"
+        >
           <MyButton
             text="add player"
-            icon-name="plus"/>
+            icon-name="plus"
+            @click="addPlayer"
+          />
         </div>
       </div>
     </div>
@@ -52,11 +59,23 @@ export default {
     ...mapGetters({
       getStringResource: "getStringResource"
     }),
+    abilityToAddPlayer() {
+      return this.playersArray.length < 4
+    },
+    abilityToRemovePlayer() {
+      return this.playersArray.length > 2
+    },
     playersArray() {
       return Game.getPlayersArray()
     }
   },
   methods: {
+    addPlayer() {
+      if (!this.abilityToAddPlayer) {
+        return
+      }
+      Game.addPlayer()
+    },
     startGame() {
       Game.generateGameField(10)
       Game.started = true
@@ -117,6 +136,14 @@ export default {
 .players__add-button {
   display: flex;
   justify-content: center;
+
+  opacity: 1;
+
+  transition: opacity .3s ease;
+}
+
+.players__add-button-hidden {
+  opacity: 0;
 }
 
 

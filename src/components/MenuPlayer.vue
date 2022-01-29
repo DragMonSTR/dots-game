@@ -65,8 +65,8 @@ export default {
 
 
 .color-button {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   margin: 0 25px 0 0;
 
   border-radius: 5px;
@@ -75,10 +75,10 @@ export default {
 .name-input {
   margin: 0 50px 0 0;
   width: 500px;
-  height: 80px;
+  height: 70px;
   padding: 0 20px;
 
-  font-size: 45px;
+  font-size: 40px;
   font-weight: 500;
 
   background: none;
@@ -86,8 +86,8 @@ export default {
 }
 
 .remove-button {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
 
   background: url("../assets/img/icons/minus.svg") center no-repeat;
   background-size: contain;

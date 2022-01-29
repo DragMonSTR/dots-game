@@ -18,23 +18,12 @@ export default class Game {
     this.started = true
   }
 
-  static generatePlayers(playersNumber) {
+  static generatePlayers(playersNumber, randomNames) {
     this.playersArray.value = []
 
-    const playerNames = getPlayerNames()
+    const playerNames = randomNames.slice(0, playersNumber)
     fillPlayersArray(playerNames)
     setPlayersColors()
-
-    function getPlayerNames() {
-      const playerNames = [
-        "monkey",
-        "cat",
-        "dog",
-        "pig"
-      ]
-
-      return playerNames.slice(0, playersNumber)
-    }
 
     function fillPlayersArray(playerNames) {
       for (let i = 0; i < playersNumber; i++) {
@@ -62,7 +51,7 @@ export default class Game {
     }
   }
 
-  static addPlayer() {
+  static addPlayer(randomNames) {
     const id = Game.getPlayersArray().length
     const name = generatePlayerName()
     const colors = generatePlayerColors()
@@ -72,26 +61,18 @@ export default class Game {
 
 
     function generatePlayerName() {
-      const allNames = [
-        "monkey",
-        "cat",
-        "dog",
-        "pig",
-        "elephant",
-        "lion",
-        "tiger"
-      ]
+      const availableNames = randomNames
 
       for (let player of Game.getPlayersArray()) {
         const existingPlayerName = player.name
-        const existingNameIndex = allNames.indexOf(existingPlayerName)
+        const existingNameIndex = availableNames.indexOf(existingPlayerName)
         if (existingNameIndex === -1) {
           continue
         }
-        allNames.splice(existingNameIndex, 1)
+        availableNames.splice(existingNameIndex, 1)
       }
 
-      return getRandomArrayElement(allNames)
+      return getRandomArrayElement(availableNames)
     }
 
     function generatePlayerColors() {

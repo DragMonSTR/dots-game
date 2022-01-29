@@ -74,7 +74,8 @@ export default {
       if (!this.abilityToAddPlayer) {
         return
       }
-      Game.addPlayer()
+      const randomNames = this.getStringResource("randomNames")
+      Game.addPlayer(randomNames)
     },
     startGame() {
       Game.generateGameField(10)
@@ -83,7 +84,12 @@ export default {
     }
   },
   mounted() {
-    Game.generatePlayers(2)
+    if (this.playersArray.length) {
+      return
+    }
+
+    const randomNames = this.getStringResource("randomNames")
+    Game.generatePlayers(2, randomNames)
   }
 }
 </script>

@@ -44,7 +44,7 @@ export default class Game {
     }
 
     function setPlayersColors() {
-      const colors = colorData.playersColors.slice();
+      const colors = colorData.playersColors.slice()
 
       for (let player of Game.playersArray.value) {
         const colorIndex = getRandomInt(0, colors.length)
@@ -54,6 +54,66 @@ export default class Game {
       }
     }
 
+
+    function getRandomInt(min, max) {
+      min = Math.ceil(min)
+      max = Math.floor(max)
+      return Math.floor(Math.random() * (max - min)) + min
+    }
+  }
+
+  static addPlayer() {
+    const id = Game.getPlayersArray().length
+    const name = generatePlayerName()
+    const colors = generatePlayerColors()
+
+    const player = new Player(id, name, colors)
+    Game.playersArray.value.push(player)
+
+
+    function generatePlayerName() {
+      const allNames = [
+        "monkey",
+        "cat",
+        "dog",
+        "pig",
+        "elephant",
+        "lion",
+        "tiger"
+      ]
+
+      for (let player of Game.getPlayersArray()) {
+        const existingPlayerName = player.name
+        const existingNameIndex = allNames.indexOf(existingPlayerName)
+        if (existingNameIndex === -1) {
+          continue
+        }
+        allNames.splice(existingNameIndex, 1)
+      }
+
+      return getRandomArrayElement(allNames)
+    }
+
+    function generatePlayerColors() {
+      const allColors = colorData.playersColors.slice()
+
+      for (let player of Game.getPlayersArray()) {
+        const existingPlayerColors = player.colors
+
+        for (let i = 0; i < allColors.length; i++) {
+          if (allColors[i][0] === existingPlayerColors[0]) {
+            allColors.splice(i, 1)
+          }
+        }
+      }
+
+      return getRandomArrayElement(allColors)
+    }
+
+    function getRandomArrayElement(array) {
+      const index = getRandomInt(0, array.length)
+      return array[index]
+    }
 
     function getRandomInt(min, max) {
       min = Math.ceil(min)

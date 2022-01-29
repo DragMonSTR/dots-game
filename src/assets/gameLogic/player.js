@@ -1,10 +1,10 @@
 import GameField from "@/assets/gameLogic/gameField";
 
 export default class Player {
-  constructor(id, name) {
+  constructor(id, name, colors = []) {
     this.id = id
     this.name = name
-    this.colors = []
+    this.colors = colors
     this.place = 1
   }
 

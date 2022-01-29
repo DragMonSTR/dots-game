@@ -13,13 +13,28 @@ export default class Game {
 
 
   static addPlayer(randomNames) {
-    const id = Game.getPlayersArray().length
+    const id = getMaxPlayerId() + 1
     const name = generatePlayerName()
     const colors = generatePlayerColors()
 
     const player = new Player(id, name, colors)
     Game.playersArray.value.push(player)
 
+
+    function getMaxPlayerId() {
+      const playersArray = Game.getPlayersArray()
+      if (!playersArray.length) {
+        return 0
+      }
+
+      let maxPlayerId = playersArray[0].id
+      for (let player of playersArray) {
+        if (player.id > maxPlayerId) {
+          maxPlayerId = player.id
+        }
+      }
+      return maxPlayerId
+    }
 
     function generatePlayerName() {
       const availableNames = randomNames

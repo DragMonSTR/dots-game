@@ -31,11 +31,36 @@
             >
               <MyButton
                 :text="getStringResource('addPlayer')"
+                :text-size="40"
                 icon-name="plus"
                 @click="addPlayer"
               />
             </div>
           </TransitionGroup>
+        </div>
+      </div>
+
+      <div class="content__field field">
+        <div class="field__title">
+          Game field
+        </div>
+        <div class="field__buttons">
+          <div class="field__button">
+            <MyButton
+              text="small (7 x 7)"
+              :text-size="40"/>
+          </div>
+          <div class="field__button">
+            <MyButton
+              text="middle (10 x 10)"
+              :text-size="40"
+              :selected="true"/>
+          </div>
+          <div class="field__button">
+            <MyButton
+              text="large (15 x 15)"
+              :text-size="40"/>
+          </div>
         </div>
       </div>
     </div>
@@ -121,8 +146,12 @@ export default {
 }
 
 
+.content__players {
+  height: 600px;
+}
+
 .players__title {
-  margin: 0 0 60px 0;
+  margin: 0 0 50px 0;
 
   font-size: 50px;
   font-weight: 500;
@@ -139,7 +168,7 @@ export default {
 }
 
 .players__list-item {
-  margin: 0 0 50px 0;
+  margin: 0 0 40px 0;
 }
 
 
@@ -173,6 +202,31 @@ export default {
 
 .players__add-button-hidden {
   opacity: 0;
+}
+
+
+.field__title {
+  margin: 0 0 30px 0;
+
+  font-size: 50px;
+  font-weight: 500;
+  text-align: center;
+  text-transform: capitalize;
+
+  color: #555;
+}
+
+.field__buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.field__button {
+  margin: 0 25px 0 0;
+}
+
+.field__button:last-child {
+  margin: 0;
 }
 
 

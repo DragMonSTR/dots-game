@@ -21,6 +21,11 @@
             :player="player"
           />
         </div>
+        <div class="players__add-button">
+          <MyButton
+            text="add player"
+            icon-name="plus"/>
+        </div>
       </div>
     </div>
 
@@ -106,6 +111,12 @@ export default {
 
 .players__list-item {
   margin: 0 0 50px 0;
+}
+
+
+.players__add-button {
+  display: flex;
+  justify-content: center;
 }
 
 

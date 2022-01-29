@@ -28,7 +28,7 @@
           }"
         >
           <MyButton
-            text="add player"
+            :text="getStringResource('addPlayer')"
             icon-name="plus"
             @click="addPlayer"
           />

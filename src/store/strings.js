@@ -24,6 +24,10 @@ export default {
     players: {
       en: "players",
       ru: "игроки"
+    },
+    addPlayer: {
+      en: "add player",
+      ru: "добавить игрока"
     }
   })
 }

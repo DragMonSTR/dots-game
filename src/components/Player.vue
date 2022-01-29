@@ -22,15 +22,27 @@
           'background-color': player.colors[0],
           'width': barWidthInPercent + '%'
         }">
-        {{ player.countCellsNumber() }}
-        <span class="player__score-parameter">&nbsp;cells</span>
+        <p class="player__score-value"
+           :class="{'player__score-value-separately': barWidthInPercent < 40}"
+        >
+          {{ player.countCellsNumber() }}
+          <span class="player__score-parameter">
+            {{getStringResource("cells")}}
+            &nbsp;&nbsp;
+          </span>
+          {{ player.countDotsNumber() }}
+          <span class="player__score-parameter">
+            {{getStringResource("dots")}}
+        </span>
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import GameField from "@/assets/gameLogic/gameField";
+import {mapGetters} from "vuex"
+import GameField from "@/assets/gameLogic/gameField"
 
 export default {
   name: "Player",
@@ -41,6 +53,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      getStringResource: "getStringResource"
+    }),
     barWidthInPercent() {
       const playerCellsNumber = this.player.countCellsNumber()
       const maxPlayerCellsNumber = GameField.countMaxPlayerCellNumber()
@@ -126,14 +141,27 @@ export default {
   justify-content: center;
   align-items: center;
 
-  font-size: 35px;
-  font-weight: 500;
-
-  color: #fff;
   background-color: #afa;
   border-radius: 0 70px 70px 0;
 
   transition: width .5s ease;
+}
+
+
+.player__score-value {
+  font-size: 35px;
+  font-weight: 500;
+
+  color: #fff;
+}
+
+.player__score-value-separately {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 400px;
+  transform: translate(110%, -50%);
+  color: #333333;
 }
 
 .player__score-parameter {

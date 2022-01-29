@@ -64,6 +64,14 @@ export default {
         "волчонок",
         "лисенок"
       ]
+    },
+    cells: {
+      en: "cells",
+      ru: "ячеек"
+    },
+    dots: {
+      en: "dots",
+      ru: "точек"
     }
   })
 }

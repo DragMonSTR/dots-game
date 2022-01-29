@@ -48,18 +48,23 @@
           <div class="field__button">
             <MyButton
               :text="getStringResource('small') + ' (7 x 7)'"
-              :text-size="40"/>
+              :text-size="40"
+              :selected="gameFieldSize === 7"
+              @click="gameFieldSize = 7"/>
           </div>
           <div class="field__button">
             <MyButton
               :text="getStringResource('middle') + ' (10 x 10)'"
               :text-size="40"
-              :selected="true"/>
+              :selected="gameFieldSize === 10"
+              @click="gameFieldSize = 10"/>
           </div>
           <div class="field__button">
             <MyButton
               :text="getStringResource('large') + ' (15 x 15)'"
-              :text-size="40"/>
+              :text-size="40"
+              :selected="gameFieldSize === 15"
+              @click="gameFieldSize = 15"/>
           </div>
         </div>
       </div>
@@ -84,6 +89,9 @@ import Game from "@/assets/gameLogic/game"
 export default {
   name: "SetGame",
   components: {MenuPlayer, MyButton},
+  data: () => ({
+    gameFieldSize: 10
+  }),
   computed: {
     ...mapGetters({
       getStringResource: "getStringResource"
@@ -96,6 +104,11 @@ export default {
     },
     playersArray() {
       return Game.getPlayersArray()
+    }
+  },
+  watch: {
+    gameFieldSize() {
+      Game.generateGameField(this.gameFieldSize)
     }
   },
   methods: {
@@ -119,6 +132,7 @@ export default {
     const randomNames = this.getStringResource("randomNames")
     Game.addPlayer(randomNames)
     Game.addPlayer(randomNames)
+    Game.generateGameField(this.gameFieldSize)
   }
 }
 </script>

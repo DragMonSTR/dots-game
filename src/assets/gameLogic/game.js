@@ -37,7 +37,7 @@ export default class Game {
     }
 
     function generatePlayerName() {
-      const availableNames = randomNames
+      const availableNames = randomNames.slice()
 
       for (let player of Game.getPlayersArray()) {
         const existingPlayerName = player.name

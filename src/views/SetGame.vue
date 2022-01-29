@@ -108,7 +108,7 @@ export default {
   },
   watch: {
     gameFieldSize() {
-      Game.generateGameField(this.gameFieldSize)
+      this.regenerateGameField()
     }
   },
   methods: {
@@ -120,8 +120,12 @@ export default {
       Game.addPlayer(randomNames)
     },
     startGame() {
+      this.regenerateGameField()
       Game.start()
       this.$router.push('/game')
+    },
+    regenerateGameField() {
+      Game.generateGameField(this.gameFieldSize)
     }
   },
   mounted() {

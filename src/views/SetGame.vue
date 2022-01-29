@@ -19,6 +19,7 @@
             v-for="player in playersArray"
             :key="player.id"
             :player="player"
+            :ability-to-remove-player="abilityToRemovePlayer"
           />
         </div>
         <div

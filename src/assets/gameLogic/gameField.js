@@ -142,12 +142,12 @@ export default class GameField {
     return cellNumber
   }
 
-  static countPlayerDotsNumber(playerIndex) {
+  static countPlayerDotsNumber(playerId) {
     let dotsNumber = 0
 
     for (let i = 0; i < this.getSize(); i++) {
       const cell = this.getCellByIndex(i)
-      if (cell.playerIndex === playerIndex) {
+      if (cell.playerId === playerId) {
         dotsNumber += cell.dotsNumber
       }
     }

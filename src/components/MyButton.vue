@@ -4,7 +4,9 @@
          :src="iconFileName"
          alt="">
 
-    <p class="text">
+    <p
+      class="text"
+      v-if="text">
       {{ text }}
     </p>
   </div>
@@ -16,7 +18,7 @@ export default {
   props: {
     text: {
       type: String,
-      required: true
+      default: ""
     },
     iconName: {
       type: String,
@@ -54,10 +56,11 @@ export default {
 .icon {
   width: 50px;
   height: 50px;
-  margin: 0 20px 0 0;
 }
 
 .text {
+  margin: 0 0 0 20px;
+
   font-size: 50px;
   text-align: center;
 

@@ -1,12 +1,17 @@
 <template>
-  <div class="my-button">
+  <div class="my-button"
+       :class="{'my-button-selected': selected}"
+       :style="{'height': `${textSize * 2}px`}">
     <img class="icon"
+         v-if="iconName"
          :src="iconFileName"
-         alt="">
+         alt=""
+         :style="{'margin-right': iconMarginRight}">
 
     <p
       class="text"
-      v-if="text">
+      v-if="text"
+      :style="{'font-size': `${textSize}px`}">
       {{ text }}
     </p>
   </div>
@@ -16,16 +21,30 @@
 export default {
   name: "Button",
   props: {
+    selected: {
+      type: Boolean,
+      default: false
+    },
     text: {
       type: String,
       default: ""
     },
+    textSize: {
+      type: Number,
+      default: 50
+    },
     iconName: {
       type: String,
-      required: true
+      default: ""
     }
   },
   computed: {
+    iconMarginRight() {
+      if (!this.text) {
+        return 0
+      }
+      return "20px"
+    },
     iconFileName() {
       return require(`@/assets/img/icons/${this.iconName}.svg`)
     }
@@ -48,6 +67,10 @@ export default {
   cursor: pointer;
 }
 
+.my-button-selected {
+  background-color: #e3e3c9;
+}
+
 .my-button:hover {
   background-color: #e3e3c9;
 }
@@ -59,9 +82,6 @@ export default {
 }
 
 .text {
-  margin: 0 0 0 20px;
-
-  font-size: 50px;
   text-align: center;
 
   color: #333;

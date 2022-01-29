@@ -124,12 +124,12 @@ export default class GameField {
     return maxPlayerCellNumber
   }
 
-  static countPlayerCellNumber(playerIndex) {
+  static countPlayerCellNumber(playerId) {
     let cellNumber = 0
 
     for (let i = 0; i < this.getSize(); i++) {
       const cell = this.getCellByIndex(i)
-      if (cell.playerIndex === playerIndex) {
+      if (cell.playerId === playerId) {
         cellNumber++
       }
     }

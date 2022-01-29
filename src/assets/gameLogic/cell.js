@@ -7,7 +7,7 @@ export default class Cell {
 
   verticalIndex
   horizontalIndex
-  playerIndex
+  playerId
   dotsNumber
   newDotsAfterExplosionCycle
   componentContext
@@ -16,7 +16,7 @@ export default class Cell {
   constructor(verticalIndex, horizontalIndex) {
     this.verticalIndex = verticalIndex
     this.horizontalIndex = horizontalIndex
-    this.playerIndex = null
+    this.playerId = null
     this.dotsNumber = 0
     this.newDotsAfterExplosionCycle = 0
   }
@@ -27,17 +27,18 @@ export default class Cell {
   }
 
   getColor() {
-    if (this.playerIndex === null) {
+    if (this.playerId === null) {
       return colorData.emptyCell
     }
 
-    const player = Game.getPlayer(this.playerIndex)
+
+    const player = Game.getPlayer(this.playerId)
     const colorIndex = Math.min(this.dotsNumber, Cell.maxDotsNumber)
     return player.colors[colorIndex - 1]
   }
 
-  giveToPlayer(playerIndex, dotsNumber = 1) {
-    this.playerIndex = playerIndex
+  giveToPlayer(playerId, dotsNumber = 1) {
+    this.playerId = playerId
     this.dotsNumber = dotsNumber
   }
 
@@ -45,7 +46,7 @@ export default class Cell {
     if (!Game.getMoveAvailable()) {
       return false
     }
-    return this.playerIndex === Game.playerWhoMovesIndex;
+    return this.playerId === Game.playerWhoMovesId;
   }
 
   clicked() {
@@ -67,8 +68,8 @@ export default class Cell {
 
     const neighbourCells = this.getNeighbourCells()
     for (let neighbourCell of neighbourCells) {
-      if (neighbourCell.playerIndex !== this.playerIndex) {
-        neighbourCell.giveToPlayer(this.playerIndex, 0)
+      if (neighbourCell.playerIndex !== this.playerId) {
+        neighbourCell.giveToPlayer(this.playerId, 0)
       }
       neighbourCell.addDotAfterExplosionCycle()
     }

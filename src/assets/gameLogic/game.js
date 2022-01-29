@@ -9,7 +9,7 @@ export default class Game {
   static moveAvailable = ref(true)
 
   static playersArray = ref([])
-  static playerWhoMovesIndex = 0
+  static playerWhoMovesId
 
 
   static addPlayer(randomNames) {
@@ -92,18 +92,40 @@ export default class Game {
     }
   }
 
+
+  static start() {
+    this.playerWhoMovesId = this.getPlayersIdArray()[0]
+    this.generateGameField(10)
+    this.started = true
+  }
+
   static generateGameField(gameFieldSideSize) {
     GameField.setSize(gameFieldSideSize, gameFieldSideSize)
     GameField.giveStartCellsToPlayers()
   }
 
 
+  static getPlayersIdArray() {
+    const players = Game.getPlayersArray()
+
+    const idArray = []
+    for (let player of players) {
+      idArray.push(player.id)
+    }
+    return idArray
+  }
+
   static getPlayersArray() {
     return this.playersArray.value
   }
 
-  static getPlayer(playerIndex) {
-    return this.playersArray.value[playerIndex]
+  static getPlayer(playerId) {
+    const playersArray = Game.getPlayersArray()
+    for (let player of playersArray) {
+      if (player.id === playerId) {
+        return player
+      }
+    }
   }
 
   static getMoveAvailable() {
@@ -113,16 +135,21 @@ export default class Game {
   static cellClicked() {
     this.moveAvailable.value = false
     GameField.runExplosions()
-    this.switchPlayerWhoMovesIndex()
+    this.switchPlayerWhoMovesId()
   }
 
 
-  static switchPlayerWhoMovesIndex() {
-    this.playerWhoMovesIndex++
-    if (this.playerWhoMovesIndex === this.playersArray.value.length) {
-      this.playerWhoMovesIndex = 0
+  static switchPlayerWhoMovesId() {
+    const idArray = this.getPlayersIdArray()
+
+    let playerWhoMovesIndex = idArray.indexOf(this.playerWhoMovesId) + 1
+    if (playerWhoMovesIndex === idArray.length) {
+      playerWhoMovesIndex = 0
     }
+
+    this.playerWhoMovesId = idArray[playerWhoMovesIndex]
   }
+
 
   static updatePlayersPlaces() {
     const playersArray = Game.playersArray.value

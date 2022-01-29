@@ -55,28 +55,29 @@ export default class GameField {
     const rightBottomCell = this.getCellByPosition(maxVerticalIndex, maxHorizontalIndex)
     const leftBottomCell = this.getCellByPosition(maxVerticalIndex, minHorizontalIndex)
 
-    const playersNumber = Game.playersArray.value.length
+    const playersNumber = Game.getPlayersArray().length
+    const playersIdArray = Game.getPlayersIdArray()
     switch (playersNumber) {
       case 1:
-        leftTopCell.giveToPlayer(0, 1)
-        this.getCellByIndex(1).giveToPlayer(0, 2)
-        this.getCellByIndex(2).giveToPlayer(0, 3)
-        this.getCellByIndex(3).giveToPlayer(0, 4)
+        leftTopCell.giveToPlayer(playersIdArray[0], 1)
+        this.getCellByIndex(1).giveToPlayer(playersIdArray[0], 2)
+        this.getCellByIndex(2).giveToPlayer(playersIdArray[0], 3)
+        this.getCellByIndex(3).giveToPlayer(playersIdArray[0], 4)
         break
       case 2:
-        leftTopCell.giveToPlayer(0)
-        rightBottomCell.giveToPlayer(1)
+        leftTopCell.giveToPlayer(playersIdArray[0])
+        rightBottomCell.giveToPlayer(playersIdArray[1])
         break
       case 3:
-        leftTopCell.giveToPlayer(0)
-        rightTopCell.giveToPlayer(1)
-        rightBottomCell.giveToPlayer(2)
+        leftTopCell.giveToPlayer(playersIdArray[0])
+        rightTopCell.giveToPlayer(playersIdArray[1])
+        rightBottomCell.giveToPlayer(playersIdArray[2])
         break
       case 4:
-        leftTopCell.giveToPlayer(0)
-        rightTopCell.giveToPlayer(1)
-        rightBottomCell.giveToPlayer(2)
-        leftBottomCell.giveToPlayer(3)
+        leftTopCell.giveToPlayer(playersIdArray[0])
+        rightTopCell.giveToPlayer(playersIdArray[1])
+        rightBottomCell.giveToPlayer(playersIdArray[2])
+        leftBottomCell.giveToPlayer(playersIdArray[3])
         break
       default:
         throw new Error("Players number must be from 2 to 4")

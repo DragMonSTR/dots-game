@@ -14,25 +14,28 @@
           {{ getStringResource('players') }}
         </div>
         <div class="players__list">
-          <MenuPlayer
-            class="players__list-item"
-            v-for="player in playersArray"
-            :key="player.id"
-            :player="player"
-            :ability-to-remove-player="abilityToRemovePlayer"
-          />
-        </div>
-        <div
-          class="players__add-button"
-          :class="{
-            'players__add-button-hidden': !abilityToAddPlayer
-          }"
-        >
-          <MyButton
-            :text="getStringResource('addPlayer')"
-            icon-name="plus"
-            @click="addPlayer"
-          />
+          <TransitionGroup name="menu-players-list">
+            <MenuPlayer
+              class="players__list-item"
+              v-for="player in playersArray"
+              :key="player.id"
+              :player="player"
+              :ability-to-remove-player="abilityToRemovePlayer"
+            />
+            <div
+              :key="1000"
+              class="players__add-button"
+              :class="{
+                'players__add-button-hidden': !abilityToAddPlayer
+              }"
+            >
+              <MyButton
+                :text="getStringResource('addPlayer')"
+                icon-name="plus"
+                @click="addPlayer"
+              />
+            </div>
+          </TransitionGroup>
         </div>
       </div>
     </div>
@@ -79,8 +82,7 @@ export default {
       Game.addPlayer(randomNames)
     },
     startGame() {
-      Game.generateGameField(10)
-      Game.started = true
+      Game.start()
       this.$router.push('/game')
     }
   },
@@ -141,13 +143,32 @@ export default {
 }
 
 
+.menu-players-list-enter-active,
+.menu-players-list-leave-active {
+  transition: all .3s ease;
+}
+
+.menu-players-list-enter-from,
+.menu-players-list-leave-to {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.menu-players-list-leave-active {
+  position: absolute;
+}
+
+.menu-players-list-move {
+  transition: transform .4s ease,
+  opacity .3s ease;
+}
+
+
 .players__add-button {
   display: flex;
   justify-content: center;
 
   opacity: 1;
-
-  transition: opacity .3s ease;
 }
 
 .players__add-button-hidden {

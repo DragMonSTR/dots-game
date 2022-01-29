@@ -89,7 +89,8 @@ export default {
     }
 
     const randomNames = this.getStringResource("randomNames")
-    Game.generatePlayers(2, randomNames)
+    Game.addPlayer(randomNames)
+    Game.addPlayer(randomNames)
   }
 }
 </script>

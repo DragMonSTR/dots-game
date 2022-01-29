@@ -6,8 +6,8 @@ export default {
       ru: "играть"
     },
     rules: {
-      en: "rules",
-      ru: "правила"
+      en: "how to play?",
+      ru: "как играть?"
     },
     language: {
       en: "language",
@@ -28,6 +28,26 @@ export default {
     addPlayer: {
       en: "add player",
       ru: "добавить игрока"
+    },
+    randomNames: {
+      en: [
+        "kitten",
+        "puppy",
+        "duckling",
+        "piglet",
+        "hare",
+        "wolf cub",
+        "fox cub"
+      ],
+      ru: [
+        "котенок",
+        "щенок",
+        "утенок",
+        "поросенок",
+        "зайчонок",
+        "волчонок",
+        "лисенок"
+      ]
     }
   })
 }

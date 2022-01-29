@@ -42,23 +42,23 @@
 
       <div class="content__field field">
         <div class="field__title">
-          Game field
+          {{ getStringResource('gameField') }}
         </div>
         <div class="field__buttons">
           <div class="field__button">
             <MyButton
-              text="small (7 x 7)"
+              :text="getStringResource('small') + ' (7 x 7)'"
               :text-size="40"/>
           </div>
           <div class="field__button">
             <MyButton
-              text="middle (10 x 10)"
+              :text="getStringResource('middle') + ' (10 x 10)'"
               :text-size="40"
               :selected="true"/>
           </div>
           <div class="field__button">
             <MyButton
-              text="large (15 x 15)"
+              :text="getStringResource('large') + ' (15 x 15)'"
               :text-size="40"/>
           </div>
         </div>

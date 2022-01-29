@@ -29,6 +29,22 @@ export default {
       en: "add player",
       ru: "добавить игрока"
     },
+    gameField: {
+      en: "game field",
+      ru: "игровое поле"
+    },
+    small: {
+      en: "small",
+      ru: "маленькое"
+    },
+    middle: {
+      en: "middle",
+      ru: "среднее"
+    },
+    large: {
+      en: "large",
+      ru: "большое"
+    },
     randomNames: {
       en: [
         "kitten",

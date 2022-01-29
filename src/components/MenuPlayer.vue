@@ -16,13 +16,15 @@
 
     <button
       class="remove-button"
-      :class="{'remove-button-hidden': !abilityToRemovePlayer}">
+      :class="{'remove-button-hidden': !abilityToRemovePlayer}"
+      @click="removePlayer">
     </button>
   </div>
 </template>
 
 <script>
 import MyButton from "@/components/MyButton"
+import Game from "@/assets/gameLogic/game";
 
 export default {
   name: "MenuPlayer",
@@ -35,6 +37,14 @@ export default {
     abilityToRemovePlayer: {
       type: Boolean,
       required: true
+    }
+  },
+  methods: {
+    removePlayer() {
+      if (!this.abilityToRemovePlayer) {
+        return
+      }
+      Game.removePlayer(this.player.id)
     }
   }
 }

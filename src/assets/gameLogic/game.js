@@ -92,6 +92,11 @@ export default class Game {
     }
   }
 
+  static changePlayerName(playerId, name) {
+    const player = this.getPlayer(playerId)
+    player.name = name
+  }
+
 
   static start() {
     this.playerWhoMovesId = this.getPlayersIdArray()[0]

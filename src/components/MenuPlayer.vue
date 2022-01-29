@@ -12,7 +12,8 @@
       :style="{
         color: player.colors[0],
         'border': `2px solid ${player.colors[0]}`
-      }">
+      }"
+      @input="changePlayerName">
 
     <button
       class="remove-button"
@@ -45,6 +46,10 @@ export default {
         return
       }
       Game.removePlayer(this.player.id)
+    },
+    changePlayerName(e) {
+      const newName = e.target.value
+      Game.changePlayerName(this.player.id, newName)
     }
   }
 }

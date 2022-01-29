@@ -50,13 +50,18 @@ export default class GameField {
     const maxHorizontalIndex = this.getWidth() - 1
     const maxVerticalIndex = this.getHeight() - 1
 
-    const leftTopCell = this.getCellByPosition(minVerticalIndex, minHorizontalIndex)
-    const rightTopCell = this.getCellByPosition(minVerticalIndex, maxHorizontalIndex)
-    const rightBottomCell = this.getCellByPosition(maxVerticalIndex, maxHorizontalIndex)
-    const leftBottomCell = this.getCellByPosition(maxVerticalIndex, minHorizontalIndex)
+    const leftTopCell =
+      this.getCellByPosition(minVerticalIndex, minHorizontalIndex)
+    const rightTopCell =
+      this.getCellByPosition(minVerticalIndex, maxHorizontalIndex)
+    const rightBottomCell =
+      this.getCellByPosition(maxVerticalIndex, maxHorizontalIndex)
+    const leftBottomCell =
+      this.getCellByPosition(maxVerticalIndex, minHorizontalIndex)
 
     const playersNumber = Game.getPlayersArray().length
     const playersIdArray = Game.getPlayersIdArray()
+    console.log(playersIdArray)
     switch (playersNumber) {
       case 1:
         leftTopCell.giveToPlayer(playersIdArray[0], 1)
@@ -65,19 +70,19 @@ export default class GameField {
         this.getCellByIndex(3).giveToPlayer(playersIdArray[0], 4)
         break
       case 2:
-        leftTopCell.giveToPlayer(playersIdArray[0])
-        rightBottomCell.giveToPlayer(playersIdArray[1])
+        leftTopCell.giveToPlayer(playersIdArray[0], 4)
+        rightBottomCell.giveToPlayer(playersIdArray[1], 4)
         break
       case 3:
-        leftTopCell.giveToPlayer(playersIdArray[0])
-        rightTopCell.giveToPlayer(playersIdArray[1])
-        rightBottomCell.giveToPlayer(playersIdArray[2])
+        leftTopCell.giveToPlayer(playersIdArray[0], 1)
+        rightTopCell.giveToPlayer(playersIdArray[1], 4)
+        rightBottomCell.giveToPlayer(playersIdArray[2], 1)
         break
       case 4:
-        leftTopCell.giveToPlayer(playersIdArray[0])
-        rightTopCell.giveToPlayer(playersIdArray[1])
-        rightBottomCell.giveToPlayer(playersIdArray[2])
-        leftBottomCell.giveToPlayer(playersIdArray[3])
+        leftTopCell.giveToPlayer(playersIdArray[0], 4)
+        rightTopCell.giveToPlayer(playersIdArray[1], 4)
+        rightBottomCell.giveToPlayer(playersIdArray[2], 4)
+        leftBottomCell.giveToPlayer(playersIdArray[3], 4)
         break
       default:
         throw new Error("Players number must be from 2 to 4")

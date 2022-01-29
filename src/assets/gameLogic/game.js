@@ -79,6 +79,19 @@ export default class Game {
     }
   }
 
+  static removePlayer(playerId) {
+    const playersArray = this.getPlayersArray()
+
+    for (let i = 0; i < playersArray.length; i++) {
+      const player = playersArray[i]
+      if (player.id !== playerId) {
+        continue
+      }
+      playersArray.splice(i, 1)
+      return
+    }
+  }
+
   static generateGameField(gameFieldSideSize) {
     GameField.setSize(gameFieldSideSize, gameFieldSideSize)
     GameField.giveStartCellsToPlayers()

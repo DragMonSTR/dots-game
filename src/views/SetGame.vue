@@ -136,7 +136,6 @@ export default {
     const randomNames = this.getStringResource("randomNames")
     Game.addPlayer(randomNames)
     Game.addPlayer(randomNames)
-    Game.generateGameField(this.gameFieldSize)
   }
 }
 </script>
